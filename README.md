@@ -1,25 +1,34 @@
-## Bagian C - Fitur Analitik findStrongest()
+### 1. screenshot output
 
-## Method yang dirancang
-Method findStrongest() ditambahkan di class CharacterManager. Method ini mencari karakter dengan nilai attack tertinggi dari semua karakter yang tersimpan, lalu mengembalikannya sebagai satu objek Character. Jika belum ada karakter, method mengembalikan null.
+- Screenshot MainWindow sebelum perubahan data:
+![Sebelum TP8](screenshot/sebelum.png)
 
-## Alasan memilih method ini
-Di class Character, nilai attack dihitung dari level (10 + level * 5), sehingga karakter dengan level tinggi otomatis punya attack tinggi. Karena itu pertanyaan "siapa karakter terkuat" adalah analisis yang wajar untuk sebuah manager. Method getAverageLevel() hanya menghasilkan satu angka rata-rata dan findByType() hanya menyaring berdasarkan tipe, sedangkan findStrongest() membandingkan data antar karakter. Logikanya ditaruh di CharacterManager, bukan di Main, karena manager yang memegang daftar karakter. Main cukup memanggil method tanpa perlu tahu cara pencariannya.
+- Screenshot setelah data diubah:
+![Sesudah TP8](screenshot/sesudah.png)
 
-## Penerapan Encapsulation
-1. List characterList bersifat private, sehingga tidak bisa diakses atau diganti dari luar class. findStrongest() hanya membaca list dan tidak mengubah isinya.
-2. Method tidak mengembalikan ArrayList asli, sejalan dengan getAllCharacters() yang juga mengembalikan salinan list.
-3. Method juga tidak mengembalikan objek Character asli yang ada di dalam list. Karena Character punya setter publik seperti setLevel() dan setId(), jika objek aslinya dikembalikan maka kode di luar bisa mengubah data di dalam manager. Karena itu method membuat salinan dengan constructor kedua new Character(id, name, type, level, hitPoints, attackPower), sehingga seluruh atribut tersalin apa adanya.
 
-## Penanganan kasus khusus
-a. Jika list kosong, method mengembalikan null agar tidak terjadi error saat mengambil characterList.get(0).
-b. Jika ada dua karakter dengan attack yang sama, karakter yang lebih dulu ditambahkan yang terpilih, karena perbandingan memakai tanda > bukan >=.
 
-## Javadoc
-Method dilengkapi Javadoc yang menjelaskan fungsinya, bahwa hasilnya berupa salinan, dan nilai kembaliannya (@return).
 
-## Pengujian
-Di Main, findStrongest() dipanggil setelah Athena dihapus dan Gandalf serta Freya ditambahkan. Hasilnya Gandalf (level 6, attack 40), yang lebih kuat dari Arjuna (level 5, attack 35), Freya (level 4, attack 30), dan Merlin (level 3, attack 25). Level salinan kemudian diubah menjadi 99, tetapi level Gandalf di dalam manager tetap 6, sehingga terbukti objek asli tidak ikut berubah. Pada CharacterManager yang kosong, method mengembalikan null.
+### 2. Aliran Data dan Konsep MVC
 
-## Bagian D
-Google Docs: [Klik di sini](https://docs.google.com/document/d/1nm3JSOj4oQlJd0jupqna7yOGfCXycAS69TShWrSU1JY/edit?usp=sharing)
+Pada aplikasi Character Manager, `Main.java` berfungsi sebagai titik awal program untuk membuat data karakter dan memasukkannya ke dalam `CharacterManager` menggunakan method `addCharacter()`. Selanjutnya, data diambil melalui method `getAllCharacters()` dan dikirimkan ke `MainWindow` untuk ditampilkan pada antarmuka pengguna. Dalam konsep MVC (Model-View-Controller), class `Character` dan `CharacterManager` berperan sebagai Model yang mengelola data, sedangkan `MainWindow` berperan sebagai View yang menampilkan data karakter. Pemisahan ini membuat pengelolaan data dan tampilan antarmuka lebih terstruktur serta mudah dikembangkan.
+
+### 3. Daftar Karakter dan Alasan Pemilihan Tipe/Level
+
+| Nama     | Tipe    | Level | Alasan Pemilihan                                                    |
+| Arjuna   | WARRIOR | 5     | Dipilih sebagai karakter petarung dengan level menengah.            |
+| Merlin   | MAGE    | 3     | Dipilih sebagai karakter penyihir dengan level awal.                |
+| Athena   | ARCHER  | 4     | Dipilih sebagai karakter pemanah dengan level menengah.             |
+| Lancelot | WARRIOR | 6     | Dipilih sebagai petarung dengan level lebih tinggi daripada Arjuna. |
+| Galahad  | MAGE    | 6     | Dipilih sebagai penyihir dengan level lebih tinggi daripada Merlin. |
+
+Setiap karakter memiliki tipe dan level yang berbeda untuk menunjukkan bahwa aplikasi dapat menyimpan serta menampilkan data karakter secara dinamis. Nilai HP dan attack power dihitung berdasarkan level menggunakan method `calculateBaseHP()` dan `calculateBaseAttack()` pada class `Character`.
+Aliran Data: Main, CharacterManager, MainWindow dikaitkan dengan MVC Main membuat objek CharacterManager lalu mengisinya dengan karakter lewat method addCharacter(). Setelah data siap, Main membuat MainWindow di dalam SwingUtilities.invokeLater() dan mengirim objek CharacterManager ke konstruktornya. MainWindow kemudian mengambil daftar karakter lewat getAllCharacters() dan rata-rata level lewat getAverageLevel(), lalu menampilkannya ke JLabel menggunakan perulangan. Dalam konsep MVC, CharacterManager dan Character adalah Model yang menyimpan data, MainWindow adalah View yang menampilkan data, sedangkan Controller belum ada karena belum ada input dari pengguna yang perlu diproses.
+
+
+
+### 4. Link Google Docs untuk Bagian D
+
+Dokumen pengerjaan Bagian D dapat diakses melalui tautan berikut:
+
+[Tugas Bagian D — Google Docs](https://docs.google.com/document/d/10FKY3LqzMJsd6WPgZMXqHFIh4QsDaMAtAMfWeSDFqm4/edit?usp=sharing)
