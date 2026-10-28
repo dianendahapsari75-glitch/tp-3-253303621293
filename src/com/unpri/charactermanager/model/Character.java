@@ -77,4 +77,20 @@ public class Character {
                ", hp=" + hitPoints +
                ", atk=" + attackPower + '}';
     }
+
+        // ===== equals(): membandingkan ISI DATA, bukan alamat memori =====
+    // Dua Character dianggap "sama" jika NAMA-nya identik (case-sensitive)
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;                      // optimasi: jika memang object yang sama persis
+        if (!(obj instanceof Character)) return false;     // jika bukan Character, pasti tidak sama
+        Character other = (Character) obj;                 // casting aman karena sudah dicek instanceof
+        return this.name.equals(other.name);               // bandingkan isi atribut name (String punya equals sendiri)
+    }
+
+        // ===== hashCode(): pasangan equals(), memakai atribut yang sama (name) =====
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
