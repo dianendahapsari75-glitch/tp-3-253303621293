@@ -27,13 +27,11 @@ public class MainWindow extends JFrame {
     }
 
     private void initComponents() {
-    mainPanel = new JPanel();                 // container utama
+        mainPanel = new JPanel();                 // container utama
 
-        // TAMBAHAN: pakai characterList supaya warning hilang
-    for (Character c : characterList) {
-        mainPanel.add(new JLabel(c.toString()));
+        JLabel titleLabel = new JLabel("=== Daftar Karakter ===");
+        mainPanel.add(titleLabel);                 // tambahkan judul ke panel
+
+        add(mainPanel);   // "add" di sini method milik JFrame (this), menempatkan panel ke jendela
     }
-
-    add(mainPanel);
-}
 }

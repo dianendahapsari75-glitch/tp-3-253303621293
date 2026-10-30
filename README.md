@@ -31,4 +31,5 @@ Aliran Data: Main, CharacterManager, MainWindow dikaitkan dengan MVC Main membua
 
 Dokumen pengerjaan Bagian D dapat diakses melalui tautan berikut:
 
-[Tugas Bagian D — Google Docs](https://docs.google.com/document/d/10FKY3LqzMJsd6WPgZMXqHFIh4QsDaMAtAMfWeSDFqm4/edit?usp=sharing)
+[Tugas Bagian D — Google Docs]()
+https://docs.google.com/document/d/10FKY3LqzMJsd6WPgZMXqHFIh4QsDaMAtAMfWeSDFqm4/edit?usp=sharing
